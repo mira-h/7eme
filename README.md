@@ -1,6 +1,6 @@
-# ⚜️ Eagle Scout Troop 47 — Website
+# ⚜️ Groupe Sacre Coeur Gemmayzeh — Website
 
-A single-page React website for Eagle Scout Troop 47, featuring a photo gallery, group introduction, and a registration form.
+A full-stack web application for Groupe Sacre Coeur Gemmayzeh, featuring a public-facing site with photo gallery, group introduction, and registration form — plus a password-protected admin panel to manage registrations and photos.
 
 ---
 
@@ -8,55 +8,167 @@ A single-page React website for Eagle Scout Troop 47, featuring a photo gallery,
 
 ```
 vii/
-├── public/
-│   └── index.html        # HTML entry point
-├── src/
-│   ├── App.js            # Main website component (all code lives here)
-│   └── index.js          # React root renderer
-└── package.json          # Project dependencies and scripts
+├── client/                        # React frontend
+│   ├── public/
+│   │   └── index.html             # HTML entry point
+│   ├── src/
+│   │   ├── App.js                 # Public website
+│   │   ├── Admin.js               # Admin panel
+│   │   └── index.js               # React root renderer
+│   ├── nginx.conf                 # Nginx config (used in Docker)
+│   ├── Dockerfile
+│   └── package.json
+├── server/                        # Node.js + Express API
+│   ├── index.js                   # API routes
+│   ├── db.js                      # PostgreSQL connection & schema
+│   ├── Dockerfile
+│   └── package.json
+├── docker-compose.yml             # Orchestrates all 3 services
+├── .env                           # Secrets & config (never commit this)
+└── README.md
 ```
 
 ---
 
-## 🚀 Getting Started
+## 🧱 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React 18 |
+| Backend | Node.js + Express |
+| Database | PostgreSQL 15 |
+| Reverse Proxy | Nginx |
+| Containerization | Docker + Docker Compose |
+
+---
+
+## 🐳 Running with Docker (Recommended)
+
+This is the easiest way — one command starts everything.
 
 ### Prerequisites
 
-Make sure you have **Node.js** installed on your machine.
+- Install **Docker Desktop** from [docker.com](https://docker.com)
 
-- Download from: https://nodejs.org (choose the **LTS** version)
-- Verify installation:
+### Steps
 
-```bash
-node -v
-npm -v
+1. Clone or download this repository
+2. Create a `.env` file in the root folder:
+
+```env
+POSTGRES_DB=scoutdb
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=admin123
+JWT_SECRET=some_long_random_secret_string
+ADMIN_PASSWORD=admin123
 ```
 
-### Installation
-
-1. Clone or download this project folder
-2. Open a terminal inside the project folder
-3. Install dependencies:
+3. Start everything:
 
 ```bash
+docker compose up --build
+```
+
+4. Open your browser:
+   - **Public site** → http://localhost
+   - **Admin panel** → http://localhost/admin
+
+### Useful Docker Commands
+
+```bash
+# Run in background
+docker compose up -d --build
+
+# Stop everything
+docker compose down
+
+# View live logs
+docker compose logs -f
+
+# Wipe database and start fresh
+docker compose down -v
+
+# Rebuild a single service
+docker compose up --build server
+```
+
+---
+
+## 💻 Running Locally (Without Docker)
+
+### Prerequisites
+
+- **Node.js** v18+ → [nodejs.org](https://nodejs.org)
+- **PostgreSQL** 15+ → [postgresql.org/download](https://postgresql.org/download)
+
+### 1. Create the database
+
+```bash
+psql -U postgres -c "CREATE DATABASE scoutdb;"
+```
+
+### 2. Configure the server
+
+Create `server/.env`:
+
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=scoutdb
+DB_USER=postgres
+DB_PASSWORD=your_postgres_password
+JWT_SECRET=some_long_random_secret_string
+ADMIN_PASSWORD=admin123
+PORT=4000
+```
+
+### 3. Start the server
+
+```bash
+cd server
 npm install
+npm run dev
 ```
 
-### Running Locally
+### 4. Start the client
+
+In a second terminal:
 
 ```bash
+cd client
+npm install
 npm start
 ```
 
-The site will open automatically at **http://localhost:3000**
+- **Public site** → http://localhost:3000
+- **Admin panel** → http://localhost:3000/admin
 
-### Building for Production
+> When running locally (without Docker), set `const API = "http://localhost:4000"` at the top of `App.js` and `Admin.js`.
 
-```bash
-npm run build
+---
+
+## ☁️ GitHub Codespaces
+
+PostgreSQL is not pre-installed in Codespaces. Add this file to auto-configure the environment:
+
+**`.devcontainer/devcontainer.json`**
+```json
+{
+  "name": "Scout App",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+  "features": {
+    "ghcr.io/itsmechlark/features/postgresql:1": { "version": "14" }
+  },
+  "postStartCommand": "sudo service postgresql start && cd server && npm install && cd ../client && npm install",
+  "forwardPorts": [3000, 4000]
+}
 ```
 
-This creates an optimized `build/` folder ready to deploy to any static host.
+Then set port **4000** to **Public** in the Ports tab and update `client/.env`:
+
+```env
+REACT_APP_API_URL=https://your-codespace-name-4000.app.github.dev
+```
 
 ---
 
@@ -64,11 +176,20 @@ This creates an optimized `build/` folder ready to deploy to any static host.
 
 | Section | Description |
 |---|---|
-| **Hero** | Full-screen banner with auto-cycling background photos and animated title |
-| **About** | Troop story, stats (alumni, years active, Eagle Scouts), and 4 core values cards |
-| **Gallery** | Large featured image with smooth transitions and a clickable thumbnail strip |
-| **Registration Form** | Collects scout name, age, parent info, phone, email, and notes — shows confirmation on submit |
-| **Footer** | Contact info and troop motto |
+| **Hero** | Full-screen banner with auto-cycling photos and animated title |
+| **About** | Troop story, stats, and 4 core values cards |
+| **Gallery** | Featured image with transitions and clickable thumbnail strip |
+| **Registration Form** | Saves to PostgreSQL, shows confirmation on submit |
+| **Admin — Registrations** | View, browse, and delete all registrations in a table |
+| **Admin — Photos** | Add, edit, and delete gallery photos with live preview |
+
+---
+
+## 🔐 Admin Panel
+
+Navigate to `/admin` on the site. Login with the password set in `ADMIN_PASSWORD` in your `.env` file.
+
+The default password is `admin123` — **change this before deploying publicly.**
 
 ---
 
@@ -76,31 +197,24 @@ This creates an optimized `build/` folder ready to deploy to any static host.
 
 - **Theme:** Dark adventure-lodge aesthetic with gold (`#D4A017`) accents
 - **Fonts:** Playfair Display (headings) + Libre Baskerville (body) via Google Fonts
-- **Images:** Sourced from Unsplash (no account required)
-- **Animations:** CSS keyframe animations for hero entrance, hover effects on cards and thumbnails
+- **Images:** Sourced from Unsplash — replace with your own in the Admin panel
+- **Animations:** CSS keyframe animations on hero entrance, cards, and thumbnails
 
 ---
 
 ## 🛠️ Customization
 
 ### Change Troop Name or Info
-Edit the text directly in `src/App.js`. Search for `"TROOP 47"` or `"Eagle Scout"` to find the relevant lines.
+Edit `client/src/App.js` — search for `"TROOP 47"` to find all relevant lines.
 
 ### Change Photos
-Find the `photos` array near the top of `src/App.js` and replace the Unsplash URLs with your own image URLs:
-
-```js
-const photos = [
-  { url: "https://your-image-url.com/photo1.jpg", caption: "Your Caption" },
-  ...
-];
-```
+Use the **Admin panel** at `/admin` → Photos tab to add, edit, or delete photos without touching any code.
 
 ### Change Contact Info
-Search for the footer section at the bottom of `src/App.js` and update the address, phone, and email.
+Edit the footer section at the bottom of `client/src/App.js`.
 
 ### Change Core Values
-Find the `values` array near the top of `src/App.js`:
+Find the `values` array near the top of `client/src/App.js`:
 
 ```js
 const values = [
@@ -113,23 +227,38 @@ const values = [
 
 ## 📦 Dependencies
 
-| Package | Version | Purpose |
-|---|---|---|
-| `react` | ^18.2.0 | UI framework |
-| `react-dom` | ^18.2.0 | DOM rendering |
-| `react-scripts` | 5.0.1 | Dev server and build tooling |
+### Client
+| Package | Purpose |
+|---|---|
+| `react` ^18.2.0 | UI framework |
+| `react-dom` ^18.2.0 | DOM rendering |
+| `react-scripts` 5.0.1 | Dev server and build tooling |
 
-No additional libraries required — all styling is done with inline CSS and a `<style>` tag.
+### Server
+| Package | Purpose |
+|---|---|
+| `express` ^4.18.2 | HTTP server and routing |
+| `pg` ^8.11.0 | PostgreSQL client |
+| `jsonwebtoken` ^9.0.0 | Admin authentication |
+| `bcryptjs` ^2.4.3 | Password hashing |
+| `cors` ^2.8.5 | Cross-origin requests |
+| `dotenv` ^16.0.3 | Environment variables |
 
 ---
 
-## 🌐 Deploying Online
+## 🚀 Deploying to a Server
 
-Once you've run `npm run build`, you can host the `build/` folder on:
+Since everything is Dockerized, deploying to any Linux server is just:
 
-- **Netlify** — drag and drop the `build/` folder at netlify.com
-- **Vercel** — run `npx vercel` in the project root
-- **GitHub Pages** — use the `gh-pages` package
+```bash
+# On your remote server (VPS, AWS, DigitalOcean, etc.)
+git clone your-repo
+cd vii
+cp .env.example .env   # fill in your values
+docker compose up -d --build
+```
+
+The site will be live on port 80. Point your domain's DNS A record to the server IP and it's done.
 
 ---
 
