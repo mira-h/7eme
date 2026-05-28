@@ -76,8 +76,8 @@ export default function ScoutWebsite() {
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <span style={{ fontSize: "1.8rem" }}>⚜️</span>
           <div>
-            <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "1.1rem", letterSpacing: "0.05em", color: "#D4A017" }}>TROOP 47</div>
-            <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", opacity: 0.6 }}>Eagle Scout Group</div>
+            <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "1.1rem", letterSpacing: "0.05em", color: "#D4A017" }}>Groupe Sacre Coeur Gemmayzeh</div>
+            <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", opacity: 0.6 }}>Scout Group</div>
           </div>
         </div>
         <div style={{ display: "flex", gap: 36 }}>
@@ -97,16 +97,16 @@ export default function ScoutWebsite() {
 
         <div style={{ position: "relative", textAlign: "center", maxWidth: 780, padding: "0 32px" }}>
           <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.75rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#D4A017", marginBottom: 24 }} className="hero-sub">
-            <span className="badge" />Est. 1987 · Blue Ridge Mountains
+            <span className="badge" />Est. 1955 · Gemmayzeh
           </div>
           <h1 className="hero-text" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "clamp(3.5rem, 8vw, 7rem)", lineHeight: 0.9, color: "#fff", marginBottom: 24, textShadow: "0 4px 40px rgba(0,0,0,0.8)" }}>
-            EAGLE<br /><span style={{ color: "#D4A017", fontStyle: "italic" }}>Scout</span><br />TROOP 47
+            EAGLE<br /><span style={{ color: "#D4A017", fontStyle: "italic" }}>Scout</span><br />Groupe Sacre Coeur Gemmayzeh
           </h1>
           <p className="hero-sub" style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", fontSize: "1.15rem", opacity: 0.8, marginBottom: 40, lineHeight: 1.7 }}>
             Where young adventurers discover their strength, build character, and forge friendships that endure a lifetime.
           </p>
           <div className="hero-btn" style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            <button onClick={() => document.getElementById("joinus")?.scrollIntoView({ behavior: "smooth" })} className="submit-btn">Join Our Troop</button>
+            <button onClick={() => document.getElementById("joinus")?.scrollIntoView({ behavior: "smooth" })} className="submit-btn">Join Our Group</button>
             <button onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })} style={{ background: "transparent", border: "1px solid rgba(212,160,23,0.6)", color: "#D4A017", padding: "16px 40px", fontFamily: "'Playfair Display', serif", fontSize: "0.95rem", letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer", borderRadius: "2px", transition: "all 0.3s" }}
               onMouseEnter={e => { e.target.style.background = "rgba(212,160,23,0.1)"; }}
               onMouseLeave={e => { e.target.style.background = "transparent"; }}>
@@ -132,10 +132,10 @@ export default function ScoutWebsite() {
               Shaping Boys<br />Into <span style={{ color: "#D4A017", fontStyle: "italic" }}>Leaders</span>
             </h2>
             <p style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "1rem", lineHeight: 1.9, opacity: 0.75, marginBottom: 24 }}>
-              Founded in 1987 in the heart of the Blue Ridge Mountains, Eagle Scout Troop 47 has guided over 800 young men through the wilderness and into adulthood. Our program is built on the timeless values of the Scout Oath — duty, honor, and service.
+              Founded in 1955 in the heart of the Gemmayzeh, Groupe Sacre Coeur has guided over 800 young people through the wilderness and into adulthood. Our program is built on the timeless values of the Scout Oath — duty, honor, and service.
             </p>
             <p style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "1rem", lineHeight: 1.9, opacity: 0.75, marginBottom: 40 }}>
-              From weekend camping trips to 50-mile backcountry expeditions, our scouts learn navigation, survival skills, first aid, and the irreplaceable art of living in community. We meet every Tuesday evening and embark on monthly adventures.
+              From weekend camping trips to 50-mile backcountry expeditions, our scouts learn navigation, survival skills, first aid, and the irreplaceable art of living in community. We meet every Saturday evening and embark on monthly adventures.
             </p>
             <div style={{ display: "flex", gap: 48 }}>
               {[["800+", "Alumni"], ["37", "Years Active"], ["12", "Eagle Scouts/yr"]].map(([num, label]) => (
@@ -209,7 +209,7 @@ export default function ScoutWebsite() {
               Begin Your <span style={{ color: "#D4A017", fontStyle: "italic" }}>Journey</span>
             </h2>
             <p style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", opacity: 0.65, lineHeight: 1.8 }}>
-              We welcome boys ages 11–17. Fill out the form below and our Scoutmaster will contact you within 48 hours.
+              We welcome youngs ages 7–17. Fill out the form below and our Scoutmaster will contact you within 48 hours.
             </p>
           </div>
 
@@ -218,7 +218,7 @@ export default function ScoutWebsite() {
               <div style={{ fontSize: "3rem", marginBottom: 24 }}>⚜️</div>
               <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", color: "#D4A017", marginBottom: 16 }}>Welcome, Scout!</h3>
               <p style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", opacity: 0.7, lineHeight: 1.8 }}>
-                Your application for <strong style={{ color: "#e8dcc8" }}>{form.name}</strong> has been received.<br />Scoutmaster Jenkins will reach out to <strong style={{ color: "#e8dcc8" }}>{form.email}</strong> shortly.
+                Your application for <strong style={{ color: "#e8dcc8" }}>{form.name}</strong> has been received.<br />CG Mira Harik will reach out to <strong style={{ color: "#e8dcc8" }}>{form.email}</strong> shortly.
               </p>
             </div>
           ) : (
@@ -265,10 +265,10 @@ export default function ScoutWebsite() {
       {/* Footer */}
       <footer style={{ padding: "48px", textAlign: "center", borderTop: "1px solid rgba(212,160,23,0.1)" }}>
         <div style={{ fontSize: "2rem", marginBottom: 16 }}>⚜️</div>
-        <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "1.2rem", color: "#D4A017", marginBottom: 4 }}>EAGLE SCOUT TROOP 47</div>
-        <div style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", fontSize: "0.85rem", opacity: 0.4, marginBottom: 24 }}>Blue Ridge Mountains · Est. 1987</div>
+        <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "1.2rem", color: "#D4A017", marginBottom: 4 }}>Groupe Sacre Coeur Gemmayzeh</div>
+        <div style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", fontSize: "0.85rem", opacity: 0.4, marginBottom: 24 }}>Gemmayzeh · Est. 1955</div>
         <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.8rem", opacity: 0.35, letterSpacing: "0.05em" }}>
-          📍 47 Scout Trail, Asheville, NC · 📞 (828) 555-0147 · ✉️ troop47@scouts.org
+          📍 College du sacre coeur, rue gouraud, Gemmayzeh · 📞 (76) 016-380 · ✉️ viiemegemmayzeh@scouts.org
         </div>
         <div style={{ marginTop: 32, fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", fontSize: "0.75rem", opacity: 0.25 }}>
           "On my honor, I will do my best."
