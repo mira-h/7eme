@@ -23,6 +23,9 @@ export default function Admin() {
       localStorage.setItem("admin_token", token);
       setToken(token);
       setLoginError("");
+      if (window.location.pathname !== '/admin') {
+        window.location.pathname = '/admin';
+      }
     } else {
       setLoginError("Wrong password");
     }
