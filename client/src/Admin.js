@@ -89,7 +89,7 @@ export default function Admin() {
       <div style={{ ...s.card, width: 360, textAlign: "center" }}>
         <div style={{ fontSize: "2rem", marginBottom: 16 }}>⚜️</div>
         <h2 style={{ fontFamily: "Georgia, serif", color: "#D4A017", marginBottom: 8 }}>Admin Login</h2>
-        <p style={{ fontSize: 13, opacity: 0.5, marginBottom: 24 }}>Troop 47 Control Panel</p>
+        <p style={{ fontSize: 13, opacity: 0.5, marginBottom: 24 }}>Groupe Sacre Coeur Control Panel</p>
         <input style={{ ...s.input, marginBottom: 12 }} type="password" placeholder="Enter admin password"
           value={password} onChange={e => setPassword(e.target.value)}
           onKeyDown={e => e.key === "Enter" && login()} />
@@ -105,7 +105,7 @@ export default function Admin() {
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <span style={{ fontSize: "1.8rem" }}>⚜️</span>
           <div>
-            <div style={{ fontFamily: "Georgia, serif", color: "#D4A017", fontWeight: 700, fontSize: "1.2rem" }}>Troop 47 Admin</div>
+            <div style={{ fontFamily: "Georgia, serif", color: "#D4A017", fontWeight: 700, fontSize: "1.2rem" }}>Groupe Sacre Coeur Admin</div>
             <div style={{ fontSize: 12, opacity: 0.45 }}>Control Panel</div>
           </div>
         </div>
