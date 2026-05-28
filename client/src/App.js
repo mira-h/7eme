@@ -29,9 +29,15 @@ export default function ScoutWebsite() {
   }, []);
 
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = () => {
-    if (form.name && form.email && form.age) setSubmitted(true);
-  };
+  const handleSubmit = async () => {
+   if (!form.name || !form.email || !form.age) return;
+   await fetch('http://localhost:4000/api/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(form),
+   });
+  setSubmitted(true);
+ };
 
   return (
     <div style={{ fontFamily: "'Georgia', 'Times New Roman', serif", background: "#0a0f0a", color: "#e8dcc8", minHeight: "100vh", overflowX: "hidden" }}>
