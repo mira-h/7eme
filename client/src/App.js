@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
-const photos = [
-  { url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&q=80", caption: "Summer Camp 2024" },
-  { url: "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=800&q=80", caption: "Night Hike" },
-  { url: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80", caption: "Mountain Trail" },
-  { url: "https://images.unsplash.com/photo-1533240332313-0db49b459ad6?w=800&q=80", caption: "Team Building" },
-  { url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80", caption: "Peak Conquest" },
-  { url: "https://images.unsplash.com/photo-1510672981848-a1c4f1cb5ccf?w=800&q=80", caption: "Campfire Stories" },
-];
+
+const [photos, setPhotos] = useState([]);
+
+useEffect(() => {
+  fetch('http://localhost:4000/api/photos')
+    .then(r => r.json())
+    .then(setPhotos);
+}, []);
 
 const values = [
   { icon: "🧭", title: "Adventure", desc: "Exploring the unknown with courage and curiosity" },
