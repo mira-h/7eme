@@ -1,14 +1,5 @@
 import { useState, useEffect } from "react";
 
-
-const [photos, setPhotos] = useState([]);
-
-useEffect(() => {
-  fetch('http://localhost:4000/api/photos')
-    .then(r => r.json())
-    .then(setPhotos);
-}, []);
-
 const values = [
   { icon: "🧭", title: "Adventure", desc: "Exploring the unknown with courage and curiosity" },
   { icon: "🤝", title: "Brotherhood", desc: "Building bonds that last a lifetime" },
@@ -17,27 +8,43 @@ const values = [
 ];
 
 export default function ScoutWebsite() {
+  const [photos, setPhotos] = useState([]);
   const [activePhoto, setActivePhoto] = useState(0);
   const [form, setForm] = useState({ name: "", age: "", email: "", phone: "", parent: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [navVisible, setNavVisible] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setNavVisible(true), 100);
-    const interval = setInterval(() => setActivePhoto(p => (p + 1) % photos.length), 4000);
-    return () => clearInterval(interval);
+    fetch('/api/photos')
+      .then(r => r.json())
+      .then(data => { if (Array.isArray(data)) setPhotos(data); })
+      .catch(err => console.error('Failed to load photos:', err));
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => setNavVisible(true), 100);
+    if (photos.length === 0) return;
+    const interval = setInterval(() => setActivePhoto(p => (p + 1) % photos.length), 4000);
+    return () => clearInterval(interval);
+  }, [photos]);
+
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
+
   const handleSubmit = async () => {
-   if (!form.name || !form.email || !form.age) return;
-   await fetch('http://localhost:4000/api/register', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(form),
-   });
-  setSubmitted(true);
- };
+    if (!form.name || !form.email || !form.age) return;
+    await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    });
+    setSubmitted(true);
+  };
+
+  if (photos.length === 0) return (
+    <div style={{ background: "#0a0f0a", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", color: "#D4A017", fontFamily: "Georgia, serif", fontSize: "1.2rem" }}>
+      ⚜️ Loading...
+    </div>
+  );
 
   return (
     <div style={{ fontFamily: "'Georgia', 'Times New Roman', serif", background: "#0a0f0a", color: "#e8dcc8", minHeight: "100vh", overflowX: "hidden" }}>
@@ -52,7 +59,6 @@ export default function ScoutWebsite() {
         .badge { display: inline-block; width: 10px; height: 10px; background: #D4A017; border-radius: 50%; margin-right: 8px; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
         .hero-text { animation: fadeUp 1s ease forwards; }
         .hero-sub { animation: fadeUp 1s 0.3s ease both; }
@@ -89,9 +95,8 @@ export default function ScoutWebsite() {
 
       {/* Hero */}
       <section style={{ position: "relative", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${photos[activePhoto].url})`, backgroundSize: "cover", backgroundPosition: "center", transition: "all 1.5s ease", filter: "brightness(0.3)" }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${photos[activePhoto]?.url})`, backgroundSize: "cover", backgroundPosition: "center", transition: "all 1.5s ease", filter: "brightness(0.3)" }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(10,15,10,0.7) 0%, transparent 60%, rgba(10,15,10,0.5) 100%)" }} />
-        
         <div style={{ position: "absolute", inset: "24px", border: "1px solid rgba(212,160,23,0.2)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", inset: "28px", border: "1px solid rgba(212,160,23,0.1)", pointerEvents: "none" }} />
 
@@ -100,7 +105,7 @@ export default function ScoutWebsite() {
             <span className="badge" />Est. 1955 · Gemmayzeh
           </div>
           <h1 className="hero-text" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "clamp(3.5rem, 8vw, 7rem)", lineHeight: 0.9, color: "#fff", marginBottom: 24, textShadow: "0 4px 40px rgba(0,0,0,0.8)" }}>
-            EAGLE<br /><span style={{ color: "#D4A017", fontStyle: "italic" }}>Scout</span><br />Groupe Sacre Coeur Gemmayzeh
+            GROUPE<br /><span style={{ color: "#D4A017", fontStyle: "italic" }}>Sacre Coeur</span><br />GEMMAYZEH
           </h1>
           <p className="hero-sub" style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", fontSize: "1.15rem", opacity: 0.8, marginBottom: 40, lineHeight: 1.7 }}>
             Where young adventurers discover their strength, build character, and forge friendships that endure a lifetime.
@@ -129,16 +134,16 @@ export default function ScoutWebsite() {
               <span className="ornament">✦</span>Our Story<span className="ornament">✦</span>
             </div>
             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.5rem, 4vw, 3.5rem)", fontWeight: 900, lineHeight: 1.05, marginBottom: 32, color: "#fff" }}>
-              Shaping Boys<br />Into <span style={{ color: "#D4A017", fontStyle: "italic" }}>Leaders</span>
+              Shaping Youth<br />Into <span style={{ color: "#D4A017", fontStyle: "italic" }}>Leaders</span>
             </h2>
             <p style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "1rem", lineHeight: 1.9, opacity: 0.75, marginBottom: 24 }}>
-              Founded in 1955 in the heart of the Gemmayzeh, Groupe Sacre Coeur has guided over 800 young people through the wilderness and into adulthood. Our program is built on the timeless values of the Scout Oath — duty, honor, and service.
+              Founded in 1955 in the heart of Gemmayzeh, Groupe Sacre Coeur has guided over 800 young people through the wilderness and into adulthood. Our program is built on the timeless values of the Scout Oath — duty, honor, and service.
             </p>
             <p style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "1rem", lineHeight: 1.9, opacity: 0.75, marginBottom: 40 }}>
-              From weekend camping trips to 50-mile backcountry expeditions, our scouts learn navigation, survival skills, first aid, and the irreplaceable art of living in community. We meet every Saturday evening and embark on monthly adventures.
+              From weekend camping trips to backcountry expeditions, our scouts learn navigation, survival skills, first aid, and the irreplaceable art of living in community. We meet every Saturday and embark on monthly adventures.
             </p>
             <div style={{ display: "flex", gap: 48 }}>
-              {[["800+", "Alumni"], ["37", "Years Active"], ["12", "Eagle Scouts/yr"]].map(([num, label]) => (
+              {[["800+", "Alumni"], ["70", "Years Active"], ["12", "Scouts/yr"]].map(([num, label]) => (
                 <div key={label}>
                   <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "2.5rem", fontWeight: 900, color: "#D4A017", lineHeight: 1 }}>{num}</div>
                   <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.55, marginTop: 6 }}>{label}</div>
@@ -177,10 +182,10 @@ export default function ScoutWebsite() {
         </div>
 
         <div style={{ position: "relative", marginBottom: 24, borderRadius: 4, overflow: "hidden", aspectRatio: "16/7", border: "1px solid rgba(212,160,23,0.2)" }}>
-          <img src={photos[activePhoto].url} alt={photos[activePhoto].caption} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all 0.8s ease" }} />
+          <img src={photos[activePhoto]?.url} alt={photos[activePhoto]?.caption} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all 0.8s ease" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,15,10,0.7) 0%, transparent 40%)" }} />
           <div style={{ position: "absolute", bottom: 28, left: 32, fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: "1.3rem", color: "#fff" }}>
-            {photos[activePhoto].caption}
+            {photos[activePhoto]?.caption}
           </div>
           <div style={{ position: "absolute", top: 16, right: 16, display: "flex", gap: 6 }}>
             {photos.map((_, i) => (
@@ -209,7 +214,7 @@ export default function ScoutWebsite() {
               Begin Your <span style={{ color: "#D4A017", fontStyle: "italic" }}>Journey</span>
             </h2>
             <p style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", opacity: 0.65, lineHeight: 1.8 }}>
-              We welcome youngs ages 7–17. Fill out the form below and our Scoutmaster will contact you within 48 hours.
+              We welcome young scouts ages 7–17. Fill out the form below and our Scoutmaster will contact you within 48 hours.
             </p>
           </div>
 
@@ -226,26 +231,26 @@ export default function ScoutWebsite() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                 <div>
                   <label style={{ display: "block", fontFamily: "'Libre Baskerville', serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", opacity: 0.6, marginBottom: 8 }}>Scout's Full Name *</label>
-                  <input className="form-input" name="name" value={form.name} onChange={handleChange} placeholder="James Anderson" />
+                  <input className="form-input" name="name" value={form.name} onChange={handleChange} placeholder="Jana Khalil" />
                 </div>
                 <div>
                   <label style={{ display: "block", fontFamily: "'Libre Baskerville', serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", opacity: 0.6, marginBottom: 8 }}>Age *</label>
-                  <input className="form-input" name="age" value={form.age} onChange={handleChange} placeholder="12" type="number" min="11" max="17" />
+                  <input className="form-input" name="age" value={form.age} onChange={handleChange} placeholder="12" type="number" min="7" max="17" />
                 </div>
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                 <div>
                   <label style={{ display: "block", fontFamily: "'Libre Baskerville', serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", opacity: 0.6, marginBottom: 8 }}>Parent / Guardian *</label>
-                  <input className="form-input" name="parent" value={form.parent} onChange={handleChange} placeholder="Robert Anderson" />
+                  <input className="form-input" name="parent" value={form.parent} onChange={handleChange} placeholder="Rami Khalil" />
                 </div>
                 <div>
                   <label style={{ display: "block", fontFamily: "'Libre Baskerville', serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", opacity: 0.6, marginBottom: 8 }}>Phone Number</label>
-                  <input className="form-input" name="phone" value={form.phone} onChange={handleChange} placeholder="+1 (555) 000-0000" />
+                  <input className="form-input" name="phone" value={form.phone} onChange={handleChange} placeholder="+961 76 000 000" />
                 </div>
               </div>
               <div>
                 <label style={{ display: "block", fontFamily: "'Libre Baskerville', serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", opacity: 0.6, marginBottom: 8 }}>Email Address *</label>
-                <input className="form-input" name="email" value={form.email} onChange={handleChange} placeholder="r.anderson@email.com" type="email" />
+                <input className="form-input" name="email" value={form.email} onChange={handleChange} placeholder="rami.khalil@email.com" type="email" />
               </div>
               <div>
                 <label style={{ display: "block", fontFamily: "'Libre Baskerville', serif", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", opacity: 0.6, marginBottom: 8 }}>Any questions or notes?</label>
@@ -268,7 +273,7 @@ export default function ScoutWebsite() {
         <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "1.2rem", color: "#D4A017", marginBottom: 4 }}>Groupe Sacre Coeur Gemmayzeh</div>
         <div style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", fontSize: "0.85rem", opacity: 0.4, marginBottom: 24 }}>Gemmayzeh · Est. 1955</div>
         <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.8rem", opacity: 0.35, letterSpacing: "0.05em" }}>
-          📍 College du sacre coeur, rue gouraud, Gemmayzeh · 📞 (76) 016-380 · ✉️ viiemegemmayzeh@scouts.org
+          📍 College du Sacre Coeur, Rue Gouraud, Gemmayzeh · 📞 (76) 016-380 · ✉️ viiemegemmayzeh@scouts.org
         </div>
         <div style={{ marginTop: 32, fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", fontSize: "0.75rem", opacity: 0.25 }}>
           "On my honor, I will do my best."
