@@ -41,22 +41,22 @@ export default function ScoutWebsite() {
   };
 
   if (photos.length === 0) return (
-    <div style={{ background: "#0a0f0a", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", color: "#D4A017", fontFamily: "Georgia, serif", fontSize: "1.2rem" }}>
+    <div style={{ background: "#0d1f1e", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", color: "#f8f08e", fontFamily: "Georgia, serif", fontSize: "1.2rem" }}>
       ⚜️ Loading...
     </div>
   );
 
   return (
-    <div style={{ fontFamily: "'Georgia', 'Times New Roman', serif", background: "#0a0f0a", color: "#e8dcc8", minHeight: "100vh", overflowX: "hidden" }}>
+    <div style={{ fontFamily: "'Georgia', 'Times New Roman', serif", background: "#0d1f1e", color: "#e8f5e4", minHeight: "100vh", overflowX: "hidden" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0a0f0a; }
-        ::-webkit-scrollbar-thumb { background: #8B6914; border-radius: 3px; }
-        .nav-link { color: #e8dcc8; text-decoration: none; font-family: 'Libre Baskerville', serif; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.3s; cursor: pointer; }
-        .nav-link:hover { color: #D4A017; }
-        .badge { display: inline-block; width: 10px; height: 10px; background: #D4A017; border-radius: 50%; margin-right: 8px; }
+        ::-webkit-scrollbar-track { background: #0d1f1e; }
+        ::-webkit-scrollbar-thumb { background: #107166; border-radius: 3px; }
+        .nav-link { color: #e8f5e4; text-decoration: none; font-family: 'Libre Baskerville', serif; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.3s; cursor: pointer; }
+        .nav-link:hover { color: #f8f08e; }
+        .badge { display: inline-block; width: 10px; height: 10px; background: #f8f08e; border-radius: 50%; margin-right: 8px; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
@@ -64,25 +64,25 @@ export default function ScoutWebsite() {
         .hero-sub { animation: fadeUp 1s 0.3s ease both; }
         .hero-btn { animation: fadeUp 1s 0.6s ease both; }
         .value-card { transition: transform 0.3s, box-shadow 0.3s; }
-        .value-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(212,160,23,0.15); }
+        .value-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(248,240,142,0.12); }
         .photo-thumb { transition: all 0.3s; cursor: pointer; border: 2px solid transparent; }
-        .photo-thumb:hover { border-color: #D4A017; transform: scale(1.05); }
-        .photo-thumb.active { border-color: #D4A017; }
-        .form-input { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,160,23,0.3); color: #e8dcc8; padding: 14px 18px; font-family: 'Libre Baskerville', serif; font-size: 0.95rem; border-radius: 2px; outline: none; transition: border-color 0.3s; }
-        .form-input:focus { border-color: #D4A017; background: rgba(212,160,23,0.05); }
-        .form-input::placeholder { color: rgba(232,220,200,0.35); }
-        .submit-btn { background: #D4A017; color: #0a0f0a; border: none; padding: 16px 48px; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: all 0.3s; }
-        .submit-btn:hover { background: #e8b820; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,160,23,0.4); }
-        .ornament { color: #D4A017; font-size: 1.5rem; margin: 0 12px; }
+        .photo-thumb:hover { border-color: #f8f08e; transform: scale(1.05); }
+        .photo-thumb.active { border-color: #f8f08e; }
+        .form-input { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(16,113,102,0.5); color: #e8f5e4; padding: 14px 18px; font-family: 'Libre Baskerville', serif; font-size: 0.95rem; border-radius: 2px; outline: none; transition: border-color 0.3s; }
+        .form-input:focus { border-color: #f8f08e; background: rgba(248,240,142,0.04); }
+        .form-input::placeholder { color: rgba(232,245,228,0.3); }
+        .submit-btn { background: #107166; color: #f8f08e; border: 2px solid #107166; padding: 16px 48px; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: all 0.3s; }
+        .submit-btn:hover { background: #0d8a7d; border-color: #f8f08e; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(16,113,102,0.5); }
+        .ornament { color: #f8f08e; font-size: 1.5rem; margin: 0 12px; }
         section { animation: fadeIn 0.8s ease; }
       `}</style>
 
       {/* Navigation */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "20px 48px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "linear-gradient(to bottom, rgba(10,15,10,0.95), transparent)", backdropFilter: "blur(10px)", opacity: navVisible ? 1 : 0, transition: "opacity 0.8s" }}>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "20px 48px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "linear-gradient(to bottom, rgba(13,31,30,0.97), transparent)", backdropFilter: "blur(10px)", opacity: navVisible ? 1 : 0, transition: "opacity 0.8s" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <span style={{ fontSize: "1.8rem" }}>⚜️</span>
           <div>
-            <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "1.1rem", letterSpacing: "0.05em", color: "#D4A017" }}>Groupe Sacre Coeur Gemmayzeh</div>
+            <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "1.1rem", letterSpacing: "0.05em", color: "#f8f08e" }}>Groupe Sacre Coeur Gemmayzeh</div>
             <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", opacity: 0.6 }}>Scout Group</div>
           </div>
         </div>
@@ -95,25 +95,25 @@ export default function ScoutWebsite() {
 
       {/* Hero */}
       <section style={{ position: "relative", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${photos[activePhoto]?.url})`, backgroundSize: "cover", backgroundPosition: "center", transition: "all 1.5s ease", filter: "brightness(0.3)" }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(10,15,10,0.7) 0%, transparent 60%, rgba(10,15,10,0.5) 100%)" }} />
-        <div style={{ position: "absolute", inset: "24px", border: "1px solid rgba(212,160,23,0.2)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", inset: "28px", border: "1px solid rgba(212,160,23,0.1)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${photos[activePhoto]?.url})`, backgroundSize: "cover", backgroundPosition: "center", transition: "all 1.5s ease", filter: "brightness(0.25)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(13,31,30,0.8) 0%, transparent 60%, rgba(13,31,30,0.6) 100%)" }} />
+        <div style={{ position: "absolute", inset: "24px", border: "1px solid rgba(248,240,142,0.2)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: "28px", border: "1px solid rgba(16,113,102,0.2)", pointerEvents: "none" }} />
 
         <div style={{ position: "relative", textAlign: "center", maxWidth: 780, padding: "0 32px" }}>
-          <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.75rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#D4A017", marginBottom: 24 }} className="hero-sub">
+          <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.75rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#f8f08e", marginBottom: 24 }} className="hero-sub">
             <span className="badge" />Est. 1955 · Gemmayzeh
           </div>
           <h1 className="hero-text" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "clamp(3.5rem, 8vw, 7rem)", lineHeight: 0.9, color: "#fff", marginBottom: 24, textShadow: "0 4px 40px rgba(0,0,0,0.8)" }}>
-            GROUPE<br /><span style={{ color: "#D4A017", fontStyle: "italic" }}>Sacre Coeur</span><br />GEMMAYZEH
+            GROUPE<br /><span style={{ color: "#f8f08e", fontStyle: "italic" }}>Sacre Coeur</span><br />GEMMAYZEH
           </h1>
-          <p className="hero-sub" style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", fontSize: "1.15rem", opacity: 0.8, marginBottom: 40, lineHeight: 1.7 }}>
+          <p className="hero-sub" style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", fontSize: "1.15rem", opacity: 0.85, marginBottom: 40, lineHeight: 1.7 }}>
             Where young adventurers discover their strength, build character, and forge friendships that endure a lifetime.
           </p>
           <div className="hero-btn" style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
             <button onClick={() => document.getElementById("joinus")?.scrollIntoView({ behavior: "smooth" })} className="submit-btn">Join Our Group</button>
-            <button onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })} style={{ background: "transparent", border: "1px solid rgba(212,160,23,0.6)", color: "#D4A017", padding: "16px 40px", fontFamily: "'Playfair Display', serif", fontSize: "0.95rem", letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer", borderRadius: "2px", transition: "all 0.3s" }}
-              onMouseEnter={e => { e.target.style.background = "rgba(212,160,23,0.1)"; }}
+            <button onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })} style={{ background: "transparent", border: "1px solid rgba(248,240,142,0.6)", color: "#f8f08e", padding: "16px 40px", fontFamily: "'Playfair Display', serif", fontSize: "0.95rem", letterSpacing: "0.1em", textTransform: "uppercase", cursor: "pointer", borderRadius: "2px", transition: "all 0.3s" }}
+              onMouseEnter={e => { e.target.style.background = "rgba(248,240,142,0.08)"; }}
               onMouseLeave={e => { e.target.style.background = "transparent"; }}>
               Learn More
             </button>
@@ -122,7 +122,7 @@ export default function ScoutWebsite() {
 
         <div style={{ position: "absolute", bottom: 40, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, opacity: 0.5 }}>
           <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase" }}>Scroll</div>
-          <div style={{ width: 1, height: 40, background: "linear-gradient(to bottom, #D4A017, transparent)" }} />
+          <div style={{ width: 1, height: 40, background: "linear-gradient(to bottom, #107166, transparent)" }} />
         </div>
       </section>
 
@@ -130,11 +130,11 @@ export default function ScoutWebsite() {
       <section id="about" style={{ padding: "120px 48px", maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
           <div>
-            <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.75rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#D4A017", marginBottom: 20 }}>
+            <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.75rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#f8f08e", marginBottom: 20 }}>
               <span className="ornament">✦</span>Our Story<span className="ornament">✦</span>
             </div>
             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.5rem, 4vw, 3.5rem)", fontWeight: 900, lineHeight: 1.05, marginBottom: 32, color: "#fff" }}>
-              Shaping Youth<br />Into <span style={{ color: "#D4A017", fontStyle: "italic" }}>Leaders</span>
+              Shaping Youth<br />Into <span style={{ color: "#f8f08e", fontStyle: "italic" }}>Leaders</span>
             </h2>
             <p style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "1rem", lineHeight: 1.9, opacity: 0.75, marginBottom: 24 }}>
               Founded in 1955 in the heart of Gemmayzeh, Groupe Sacre Coeur has guided over 800 young people through the wilderness and into adulthood. Our program is built on the timeless values of the Scout Oath — duty, honor, and service.
@@ -145,7 +145,7 @@ export default function ScoutWebsite() {
             <div style={{ display: "flex", gap: 48 }}>
               {[["800+", "Alumni"], ["70", "Years Active"], ["12", "Scouts/yr"]].map(([num, label]) => (
                 <div key={label}>
-                  <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "2.5rem", fontWeight: 900, color: "#D4A017", lineHeight: 1 }}>{num}</div>
+                  <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "2.5rem", fontWeight: 900, color: "#f8f08e", lineHeight: 1 }}>{num}</div>
                   <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.55, marginTop: 6 }}>{label}</div>
                 </div>
               ))}
@@ -153,9 +153,9 @@ export default function ScoutWebsite() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             {values.map(v => (
-              <div key={v.title} className="value-card" style={{ background: "rgba(212,160,23,0.05)", border: "1px solid rgba(212,160,23,0.15)", padding: "28px 24px", borderRadius: 4 }}>
+              <div key={v.title} className="value-card" style={{ background: "rgba(16,113,102,0.1)", border: "1px solid rgba(16,113,102,0.35)", padding: "28px 24px", borderRadius: 4 }}>
                 <div style={{ fontSize: "2rem", marginBottom: 12 }}>{v.icon}</div>
-                <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "1.1rem", color: "#D4A017", marginBottom: 8 }}>{v.title}</div>
+                <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "1.1rem", color: "#f8f08e", marginBottom: 8 }}>{v.title}</div>
                 <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.85rem", opacity: 0.65, lineHeight: 1.6 }}>{v.desc}</div>
               </div>
             ))}
@@ -165,31 +165,31 @@ export default function ScoutWebsite() {
 
       {/* Divider */}
       <div style={{ display: "flex", alignItems: "center", maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
-        <div style={{ flex: 1, height: 1, background: "linear-gradient(to right, transparent, rgba(212,160,23,0.4))" }} />
+        <div style={{ flex: 1, height: 1, background: "linear-gradient(to right, transparent, rgba(16,113,102,0.5))" }} />
         <span style={{ fontSize: "1.5rem", margin: "0 24px" }}>⚜️</span>
-        <div style={{ flex: 1, height: 1, background: "linear-gradient(to left, transparent, rgba(212,160,23,0.4))" }} />
+        <div style={{ flex: 1, height: 1, background: "linear-gradient(to left, transparent, rgba(16,113,102,0.5))" }} />
       </div>
 
       {/* Gallery */}
       <section id="gallery" style={{ padding: "120px 48px", maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.75rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#D4A017", marginBottom: 20 }}>
+          <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.75rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#f8f08e", marginBottom: 20 }}>
             <span className="ornament">✦</span>Adventures<span className="ornament">✦</span>
           </div>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.5rem, 4vw, 3.5rem)", fontWeight: 900, color: "#fff" }}>
-            Life in the <span style={{ color: "#D4A017", fontStyle: "italic" }}>Field</span>
+            Life in the <span style={{ color: "#f8f08e", fontStyle: "italic" }}>Field</span>
           </h2>
         </div>
 
-        <div style={{ position: "relative", marginBottom: 24, borderRadius: 4, overflow: "hidden", aspectRatio: "16/7", border: "1px solid rgba(212,160,23,0.2)" }}>
+        <div style={{ position: "relative", marginBottom: 24, borderRadius: 4, overflow: "hidden", aspectRatio: "16/7", border: "1px solid rgba(16,113,102,0.4)" }}>
           <img src={photos[activePhoto]?.url} alt={photos[activePhoto]?.caption} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "all 0.8s ease" }} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,15,10,0.7) 0%, transparent 40%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(13,31,30,0.8) 0%, transparent 40%)" }} />
           <div style={{ position: "absolute", bottom: 28, left: 32, fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: "1.3rem", color: "#fff" }}>
             {photos[activePhoto]?.caption}
           </div>
           <div style={{ position: "absolute", top: 16, right: 16, display: "flex", gap: 6 }}>
             {photos.map((_, i) => (
-              <div key={i} style={{ width: i === activePhoto ? 24 : 6, height: 6, background: i === activePhoto ? "#D4A017" : "rgba(255,255,255,0.3)", borderRadius: 3, transition: "all 0.4s", cursor: "pointer" }} onClick={() => setActivePhoto(i)} />
+              <div key={i} style={{ width: i === activePhoto ? 24 : 6, height: 6, background: i === activePhoto ? "#f8f08e" : "rgba(255,255,255,0.3)", borderRadius: 3, transition: "all 0.4s", cursor: "pointer" }} onClick={() => setActivePhoto(i)} />
             ))}
           </div>
         </div>
@@ -204,14 +204,14 @@ export default function ScoutWebsite() {
       </section>
 
       {/* Registration */}
-      <section id="joinus" style={{ padding: "120px 48px", background: "rgba(212,160,23,0.03)", borderTop: "1px solid rgba(212,160,23,0.1)", borderBottom: "1px solid rgba(212,160,23,0.1)" }}>
+      <section id="joinus" style={{ padding: "120px 48px", background: "rgba(16,113,102,0.06)", borderTop: "1px solid rgba(16,113,102,0.2)", borderBottom: "1px solid rgba(16,113,102,0.2)" }}>
         <div style={{ maxWidth: 700, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 64 }}>
-            <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.75rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#D4A017", marginBottom: 20 }}>
+            <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.75rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#f8f08e", marginBottom: 20 }}>
               <span className="ornament">✦</span>Enlist<span className="ornament">✦</span>
             </div>
             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.5rem, 4vw, 3.5rem)", fontWeight: 900, color: "#fff", marginBottom: 16 }}>
-              Begin Your <span style={{ color: "#D4A017", fontStyle: "italic" }}>Journey</span>
+              Begin Your <span style={{ color: "#f8f08e", fontStyle: "italic" }}>Journey</span>
             </h2>
             <p style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", opacity: 0.65, lineHeight: 1.8 }}>
               We welcome young scouts ages 7–17. Fill out the form below and our Scoutmaster will contact you within 48 hours.
@@ -219,11 +219,11 @@ export default function ScoutWebsite() {
           </div>
 
           {submitted ? (
-            <div style={{ textAlign: "center", padding: "64px 32px", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 4, animation: "scaleIn 0.6s ease" }}>
+            <div style={{ textAlign: "center", padding: "64px 32px", border: "1px solid rgba(16,113,102,0.4)", borderRadius: 4, animation: "scaleIn 0.6s ease" }}>
               <div style={{ fontSize: "3rem", marginBottom: 24 }}>⚜️</div>
-              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", color: "#D4A017", marginBottom: 16 }}>Welcome, Scout!</h3>
+              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", color: "#f8f08e", marginBottom: 16 }}>Welcome, Scout!</h3>
               <p style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", opacity: 0.7, lineHeight: 1.8 }}>
-                Your application for <strong style={{ color: "#e8dcc8" }}>{form.name}</strong> has been received.<br />CG Mira Harik will reach out to <strong style={{ color: "#e8dcc8" }}>{form.email}</strong> shortly.
+                Your application for <strong style={{ color: "#e8f5e4" }}>{form.name}</strong> has been received.<br />CG Mira Harik will reach out to <strong style={{ color: "#e8f5e4" }}>{form.email}</strong> shortly.
               </p>
             </div>
           ) : (
@@ -268,9 +268,9 @@ export default function ScoutWebsite() {
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: "48px", textAlign: "center", borderTop: "1px solid rgba(212,160,23,0.1)" }}>
+      <footer style={{ padding: "48px", textAlign: "center", borderTop: "1px solid rgba(16,113,102,0.3)" }}>
         <div style={{ fontSize: "2rem", marginBottom: 16 }}>⚜️</div>
-        <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "1.2rem", color: "#D4A017", marginBottom: 4 }}>Groupe Sacre Coeur Gemmayzeh</div>
+        <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "1.2rem", color: "#f8f08e", marginBottom: 4 }}>Groupe Sacre Coeur Gemmayzeh</div>
         <div style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", fontSize: "0.85rem", opacity: 0.4, marginBottom: 24 }}>Gemmayzeh · Est. 1955</div>
         <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.8rem", opacity: 0.35, letterSpacing: "0.05em" }}>
           📍 College du Sacre Coeur, Rue Gouraud, Gemmayzeh · 📞 (76) 016-380 · ✉️ viiemegemmayzeh@scouts.org
