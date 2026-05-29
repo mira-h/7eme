@@ -151,7 +151,7 @@ export default function Admin() {
   if (!token) return (
     <div style={{ ...s.page, display: "flex", alignItems: "center", justifyContent: "center" }}>
       <div style={{ ...s.card, width: 360, textAlign: "center" }}>
-        <div style={{ fontSize: "2rem", marginBottom: 16 }}>⚜️</div>
+        <div style={{ marginBottom: 16 }}><img src="/logo.png" alt="logo" style={{ width: 56, height: 56, objectFit: "contain" }} /></div>
         <h2 style={{ fontFamily: "Georgia, serif", color: "#f8f08e", marginBottom: 8 }}>Admin Login</h2>
         <p style={{ fontSize: 13, opacity: 0.5, marginBottom: 24 }}>Groupe Sacre Coeur Control Panel</p>
         <input style={{ ...s.input, marginBottom: 12 }} type="password" placeholder="Enter admin password"
@@ -168,7 +168,7 @@ export default function Admin() {
       {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ fontSize: "1.8rem" }}>⚜️</span>
+          <img src="/logo.png" alt="logo" style={{ width: 48, height: 48, objectFit: "contain" }} />
           <div>
             <div style={{ fontFamily: "Georgia, serif", color: "#f8f08e", fontWeight: 700, fontSize: "1.2rem" }}>Groupe Sacre Coeur Admin</div>
             <div style={{ fontSize: 12, opacity: 0.45 }}>Control Panel</div>
