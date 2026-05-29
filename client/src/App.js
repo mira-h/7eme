@@ -42,7 +42,7 @@ export default function ScoutWebsite() {
 
   if (photos.length === 0) return (
     <div style={{ background: "#0d1f1e", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", color: "#f8f08e", fontFamily: "Georgia, serif", fontSize: "1.2rem" }}>
-      ⚜️ Loading...
+      <img src="/logo.png" alt="logo" style={{ width: 48, height: 48, objectFit: "contain" }} /> Loading...
     </div>
   );
 
@@ -80,7 +80,7 @@ export default function ScoutWebsite() {
       {/* Navigation */}
       <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "20px 48px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "linear-gradient(to bottom, rgba(13,31,30,0.97), transparent)", backdropFilter: "blur(10px)", opacity: navVisible ? 1 : 0, transition: "opacity 0.8s" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ fontSize: "1.8rem" }}>⚜️</span>
+          <img src="/logo.png" alt="logo" style={{ width: 48, height: 48, objectFit: "contain" }} />
           <div>
             <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "1.1rem", letterSpacing: "0.05em", color: "#f8f08e" }}>Groupe Sacre Coeur Gemmayzeh</div>
             <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", opacity: 0.6 }}>Scout Group</div>
@@ -166,7 +166,7 @@ export default function ScoutWebsite() {
       {/* Divider */}
       <div style={{ display: "flex", alignItems: "center", maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
         <div style={{ flex: 1, height: 1, background: "linear-gradient(to right, transparent, rgba(16,113,102,0.5))" }} />
-        <span style={{ fontSize: "1.5rem", margin: "0 24px" }}>⚜️</span>
+        <img src="/logo.png" alt="logo" style={{ width: 40, height: 40, objectFit: "contain", margin: "0 24px" }} />
         <div style={{ flex: 1, height: 1, background: "linear-gradient(to left, transparent, rgba(16,113,102,0.5))" }} />
       </div>
 
@@ -220,7 +220,7 @@ export default function ScoutWebsite() {
 
           {submitted ? (
             <div style={{ textAlign: "center", padding: "64px 32px", border: "1px solid rgba(16,113,102,0.4)", borderRadius: 4, animation: "scaleIn 0.6s ease" }}>
-              <div style={{ fontSize: "3rem", marginBottom: 24 }}>⚜️</div>
+              <div style={{ marginBottom: 24 }}><img src="/logo.png" alt="logo" style={{ width: 80, height: 80, objectFit: "contain" }} /></div>
               <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", color: "#f8f08e", marginBottom: 16 }}>Welcome, Scout!</h3>
               <p style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", opacity: 0.7, lineHeight: 1.8 }}>
                 Your application for <strong style={{ color: "#e8f5e4" }}>{form.name}</strong> has been received.<br />CG Mira Harik will reach out to <strong style={{ color: "#e8f5e4" }}>{form.email}</strong> shortly.
@@ -269,7 +269,7 @@ export default function ScoutWebsite() {
 
       {/* Footer */}
       <footer style={{ padding: "48px", textAlign: "center", borderTop: "1px solid rgba(16,113,102,0.3)" }}>
-        <div style={{ fontSize: "2rem", marginBottom: 16 }}>⚜️</div>
+        <div style={{ marginBottom: 16 }}><img src="/logo.png" alt="logo" style={{ width: 56, height: 56, objectFit: "contain" }} /></div>
         <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "1.2rem", color: "#f8f08e", marginBottom: 4 }}>Groupe Sacre Coeur Gemmayzeh</div>
         <div style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", fontSize: "0.85rem", opacity: 0.4, marginBottom: 24 }}>Gemmayzeh · Est. 1955</div>
         <div style={{ fontFamily: "'Libre Baskerville', serif", fontSize: "0.8rem", opacity: 0.35, letterSpacing: "0.05em" }}>
