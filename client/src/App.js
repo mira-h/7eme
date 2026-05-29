@@ -213,9 +213,9 @@ export default function ScoutWebsite() {
             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.5rem, 4vw, 3.5rem)", fontWeight: 900, color: "#fff", marginBottom: 16 }}>
               Begin Your <span style={{ color: "#f8f08e", fontStyle: "italic" }}>Journey</span>
             </h2>
-            <p style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", opacity: 0.65, lineHeight: 1.8 }}>
-              We welcome young scouts ages 7–17. Fill out the form below and our Scoutmaster will contact you within 48 hours.
-            </p>
+              <p style={{ fontFamily: "'Libre Baskerville', serif", fontStyle: "italic", opacity: 0.65, lineHeight: 1.8 }}>
+                We welcome young scouts ages 7–17. Parents or guardians: fill out the form below and our Scoutmaster will contact you within 48 hours.
+              </p>
           </div>
 
           {submitted ? (
