@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const API = "http://localhost:4000";
+const API = "/api";
 
 export default function Admin() {
   const [token, setToken] = useState(localStorage.getItem("admin_token") || "");
@@ -13,7 +13,7 @@ export default function Admin() {
   const [editPhoto, setEditPhoto] = useState(null);
 
   const login = async () => {
-    const res = await fetch(`${API}/api/login`, {
+    const res = await fetch(`${API}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password }),
@@ -35,8 +35,8 @@ export default function Admin() {
 
   const loadData = async () => {
     const [r, p] = await Promise.all([
-      fetch(`${API}/api/registrations`, { headers }).then(r => r.json()),
-      fetch(`${API}/api/photos`).then(r => r.json()),
+      fetch(`${API}/registrations`, { headers }).then(r => r.json()),
+      fetch(`${API}/photos`).then(r => r.json()),
     ]);
     setRegistrations(Array.isArray(r) ? r : []);
     setPhotos(Array.isArray(p) ? p : []);
@@ -45,13 +45,13 @@ export default function Admin() {
   useEffect(() => { if (token) loadData(); }, [token]);
 
   const deleteReg = async (id) => {
-    await fetch(`${API}/api/registrations/${id}`, { method: "DELETE", headers });
+    await fetch(`${API}/registrations/${id}`, { method: "DELETE", headers });
     setRegistrations(r => r.filter(x => x.id !== id));
   };
 
   const addPhoto = async () => {
     if (!newPhoto.url) return;
-    const res = await fetch(`${API}/api/photos`, {
+    const res = await fetch(`${API}/photos`, {
       method: "POST", headers,
       body: JSON.stringify(newPhoto),
     });
@@ -61,7 +61,7 @@ export default function Admin() {
   };
 
   const saveEdit = async () => {
-    const res = await fetch(`${API}/api/photos/${editPhoto.id}`, {
+    const res = await fetch(`${API}/photos/${editPhoto.id}`, {
       method: "PUT", headers,
       body: JSON.stringify({ url: editPhoto.url, caption: editPhoto.caption }),
     });
@@ -71,7 +71,7 @@ export default function Admin() {
   };
 
   const deletePhoto = async (id) => {
-    await fetch(`${API}/api/photos/${id}`, { method: "DELETE", headers });
+    await fetch(`${API}/photos/${id}`, { method: "DELETE", headers });
     setPhotos(ph => ph.filter(p => p.id !== id));
   };
 
