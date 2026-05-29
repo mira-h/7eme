@@ -27,6 +27,8 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       PORT: 4000
+    volumes:
+      - uploads_data:/app/uploads
     depends_on:
       db:
         condition: service_healthy
@@ -41,3 +43,4 @@ services:
 
 volumes:
   postgres_data:
+  uploads_data:

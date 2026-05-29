@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 const { pool, init } = require('./db');
@@ -10,7 +12,31 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ── Auth middleware ──────────────────────────────────────
+// ── File upload setup ─────────────────────────────────────
+const uploadDir = '/app/uploads';
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadDir),
+  filename: (req, file, cb) => {
+    const unique = Date.now() + '-' + Math.round(Math.random() * 1e6);
+    cb(null, unique + path.extname(file.originalname));
+  }
+});
+const upload = multer({
+  storage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB max
+  fileFilter: (req, file, cb) => {
+    const allowed = /jpeg|jpg|png|webp|gif/;
+    const ok = allowed.test(path.extname(file.originalname).toLowerCase()) && allowed.test(file.mimetype);
+    ok ? cb(null, true) : cb(new Error('Only image files are allowed'));
+  }
+});
+
+// Serve uploaded images statically
+app.use('/uploads', express.static(uploadDir));
+
+// ── Auth middleware ───────────────────────────────────────
 const auth = (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) return res.status(401).json({ error: 'Unauthorized' });
@@ -22,7 +48,7 @@ const auth = (req, res, next) => {
   }
 };
 
-// ── Admin login ──────────────────────────────────────────
+// ── Admin login ───────────────────────────────────────────
 app.post('/api/login', (req, res) => {
   const { password } = req.body;
   if (password !== process.env.ADMIN_PASSWORD)
@@ -31,7 +57,13 @@ app.post('/api/login', (req, res) => {
   res.json({ token });
 });
 
-// ── Registrations ────────────────────────────────────────
+// ── File upload endpoint ──────────────────────────────────
+app.post('/api/upload', auth, upload.single('photo'), (req, res) => {
+  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+  res.json({ url: `/uploads/${req.file.filename}` });
+});
+
+// ── Registrations ─────────────────────────────────────────
 app.post('/api/register', async (req, res) => {
   const { name, age, parent, phone, email, message } = req.body;
   if (!name || !age || !email)
@@ -49,9 +81,7 @@ app.post('/api/register', async (req, res) => {
 });
 
 app.get('/api/registrations', auth, async (req, res) => {
-  const result = await pool.query(
-    'SELECT * FROM registrations ORDER BY created_at DESC'
-  );
+  const result = await pool.query('SELECT * FROM registrations ORDER BY created_at DESC');
   res.json(result.rows);
 });
 
@@ -60,7 +90,7 @@ app.delete('/api/registrations/:id', auth, async (req, res) => {
   res.json({ success: true });
 });
 
-// ── Photos ───────────────────────────────────────────────
+// ── Photos ────────────────────────────────────────────────
 app.get('/api/photos', async (req, res) => {
   const result = await pool.query('SELECT * FROM photos ORDER BY position');
   res.json(result.rows);
@@ -86,6 +116,12 @@ app.put('/api/photos/:id', auth, async (req, res) => {
 });
 
 app.delete('/api/photos/:id', auth, async (req, res) => {
+  // Also delete the file if it was uploaded (not an external URL)
+  const row = await pool.query('SELECT url FROM photos WHERE id=$1', [req.params.id]);
+  if (row.rows[0]?.url?.startsWith('/uploads/')) {
+    const filePath = path.join(uploadDir, path.basename(row.rows[0].url));
+    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+  }
   await pool.query('DELETE FROM photos WHERE id=$1', [req.params.id]);
   res.json({ success: true });
 });
