@@ -18,23 +18,32 @@ export default function Admin() {
   const [users, setUsers] = useState([]);
   const [newUnitName, setNewUnitName] = useState("");
   const [newUser, setNewUser] = useState({ username: '', password: '', role: 'chief', unit_id: '' });
-  const sections = ["Louveteaux", "Éclaireurs", "Routiers"];
+  const sections = ["Louveteaux","Louvettes", "Éclaireurs","Éclaireuses", "Routiers", "Pionnière"];
   const groupTypes = {
     Louveteaux: ["Sizaine", "Meute"],
+    Louvettes: ["Sizaine", "Meute"],
     Éclaireurs: ["Patrouille", "Troupe"],
+    Éclaireuses: ["Patrouille", "Troupe"],
     Routiers: ["Équipe", "Clan"],
+    Pionnière: ["Équipe", "Clan"],
   };
   const statusOptions = {
-    Louveteaux: ["Patte tendre", "Promesse", "Brevet de Capacité", "1ère Étoile", "2nde Étoile"],
-    Éclaireurs: ["Aspirant", "Promesse", "Badges", "2nd Classe", "1ère Classe", "Raider"],
-    Routiers: ["Promesse", "Jalon"],
+    Louveteaux: ["Patte tendre", "Loup", "SE", "SI"],
+    Louvettes: ["Patte tendre", "Louve", "SE", "SI"],
+    Éclaireurs: ["Aspirant", "Pattrouillard", "SP", "CP" ],
+    Éclaireuses: ["Aspirant", "Pattrouillard", "SP", "CP"],
+    Routiers: ["Promesse", "Routier", "CE"],
+    Pionnière: ["Promesse", "Pionniere", "CE" ],
   };
   const eventTypes = [
     { value: 'promesse', label: 'Promesse' },
-    { value: 'rank', label: 'Rank / Badge' },
-    { value: 'badge', label: 'Badge' },
+    { value: 'adhesion', label: 'Adhésion' },
+    { value: 'premiereveille', label: 'Première veille' },
+    { value: 'depart', label: 'Départ' },
+    { value: 'brevet', label: 'Brevet de Capacité/Etoile' },
+    { value: 'badge', label: 'Badge/Classe' },
     { value: 'jalon', label: 'Jalon' },
-    { value: 'transfer', label: 'Transfer / Group change' },
+    { value: 'transfer', label: 'Montée' },
   ];
   const [registrations, setRegistrations] = useState([]);
   const [photos, setPhotos] = useState([]);
